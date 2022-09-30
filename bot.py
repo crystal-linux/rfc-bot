@@ -1,4 +1,5 @@
 from github import Github
+import datetime
 import sys
 
 g = Github(open(".access_token").read().strip())
@@ -6,7 +7,7 @@ g = Github(open(".access_token").read().strip())
 def post_update(text):
     repo = g.get_repo("crystalrfc-bot/status")
     thread = repo.get_issue(1)
-    thread.create_comment(text + "\n Beep Boop! (I'm a bot, and this action was performed automagically.)")
+    thread.create_comment(text + "\nBeep Boop! (I'm a bot, and this action was performed automagically.)\nScan timestamp: `" + datetime.datetime.now().isoformat() + "`")
 
 targets = ['crystal-linux/.github', 'crystal-linux-packages/.github']
 
