@@ -43,8 +43,9 @@ for tgt in targets:
                 print(f"Total votes against resolution: {str(total_votes_against)}")
                 if (total_votes_for/len(core_team_logins)) > 0.5:
                     print("This RFC should be passed. Adding comment.")
-                    issue.create_comment("This resolution has enough votes from Core Team mebers to be considered passed. Please close the issue once appropriate actions have been taken. - Beep Boop (I'm a bot, and this action was performed automagically)")
-                    issue.lock("resolved")
+                    if not issue.locked:
+                        issue.create_comment("This resolution has enough votes from Core Team mebers to be considered passed. Please close the issue once appropriate actions have been taken. - Beep Boop (I'm a bot, and this action was performed automagically)")
+                        issue.lock("resolved")
                     rfcs_passed += 1
                     status_text += f"* Suggested that {issue.title} be acted upon, as it has passed.\n"
                 else:
