@@ -7,12 +7,7 @@ g = Github(open(".access_token").read().strip())
 def post_update(text):
     repo = g.get_repo("crystalrfc-bot/status")
     thread = repo.get_issue(1)
-    thread.create_comment(
-        text
-        + "\nBeep Boop! (I'm a bot, and this action was performed automagically.)\nScan timestamp: `"
-        + datetime.now().isoformat()
-        + "`"
-    )
+    thread.create_comment(f"{text}\nBeep Boop! (I'm a bot, and this action was performed automagically.)\nScan timestamp: `{datetime.now().isoformat()}`")
 
 
 targets = ["crystal-linux/.github", "crystal-linux-packages/.github"]
