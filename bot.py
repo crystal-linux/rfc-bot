@@ -8,14 +8,14 @@ def post_update(text):
     repo = g.get_repo("crystalrfc-bot/status")
     thread = repo.get_issue(1)
     thread.create_comment(
-        text +
-        "\nBeep Boop! (I'm a bot, and this action was performed automagically.)\nScan timestamp: `" +
-        datetime.now().isoformat() +
-        "`"
+        text
+        + "\nBeep Boop! (I'm a bot, and this action was performed automagically.)\nScan timestamp: `"
+        + datetime.now().isoformat()
+        + "`"
     )
 
 
-targets = ['crystal-linux/.github', 'crystal-linux-packages/.github']
+targets = ["crystal-linux/.github", "crystal-linux-packages/.github"]
 
 status_text = ""
 
@@ -23,8 +23,10 @@ for tgt in targets:
     repo = g.get_repo(tgt)
     status_text += f"# Examining {repo.full_name}\n"
 
-    core_team = g.get_organization('crystal-linux').get_team_by_slug('core-team')
-    trusted_contrib = g.get_organization('crystal-linux').get_team_by_slug('trusted-contribututors')
+    core_team = g.get_organization("crystal-linux").get_team_by_slug("core-team")
+    trusted_contrib = g.get_organization("crystal-linux").get_team_by_slug(
+        "trusted-contribututors"
+    )
     core_team_members = core_team.get_members()
     trusted_contrib_members = trusted_contrib.get_members()
 
@@ -38,7 +40,7 @@ for tgt in targets:
 
     rfcs_passed = 0
     for issue in repo.get_issues():
-        if 'RFC' in issue.title:
+        if "RFC" in issue.title:
             print(f"Working on: {issue.title}")
             all_reactions = issue.get_reactions()
             if all_reactions.totalCount != 0:
